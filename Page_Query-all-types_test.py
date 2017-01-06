@@ -2,8 +2,8 @@
 
 """
 Sample usage:
-
-  $ python search_analytics_api_******.py 2015-05-01  2015-05-30
+FROM THE TERMINAL RUN THE FOLLOWING:  
+  $ python thisfilename.py YY11-M1-D1 YY22-M2-D2   
 
 """
 import argparse
