@@ -26,7 +26,8 @@ start_date = str(sys.argv[1]).strip()
 end_date = str(sys.argv[2]).strip()
 
 # change property url with the properties you have verified on Google Webmaster Tool
-# property_url = ['http://www.example1.com', 'https://www.example2.com', 'http://www.example3.com', 'https://www.example4.com']
+property_url = ['http://www.example1.com', 'https://www.example2.com', 'http://www.example3.com', 'https://www.example4.com']
+# to enable data from all search types be pulled in a single script run
 searchtypes = ['web', 'image', 'video']
 
 #create output folders at the location
