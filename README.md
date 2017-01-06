@@ -1,6 +1,6 @@
 ## google search console command line app ##
 
-**Data pipeline to pull everything from that the google webmaster as to offer**
+**Data pipeline to pull everything that the google webmaster as to offer**
 ### Uses search analytics api
 - Data is fetch from the api. Next, incoming data is cleansed, treated using pandas and np. 
 - Works as a data pipeline. One app to download everything in a ready to go file format: csv.
