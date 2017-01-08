@@ -11,7 +11,7 @@
         - run directly from your terminal/cmd line
 
 #### This App basically works as a Data pipeline to pull everything that the Google Webmaster as to offer.####
-
+--
 **Techstack and more about SearchConsoleApp**
 - Search Console Api (Google Webmaster)
 - python (core)
