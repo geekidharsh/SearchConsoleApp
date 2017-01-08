@@ -1,15 +1,26 @@
-## google search console command line app ##
+## SearchConsoleApp 
+- A cli/terminal based app for client, written in python that used Webmaster's Search Console API to simplify the entire data flow from Google servers to your local client machine.
+- Features:
+	- **Simple:** 100% Client based. Simply create a local server and start using. _(Provided: Console has verified properties and Search Console API enabled with Oauth key generated already in order to authenticate client machine)._
+	- **Secure:** Connection request enabled by oauth2. Muliple requests possible upon one time authentication. 
+    - **Useful:** Get more out of [Search Console](https://www.google.com/webmasters/tools/home?hl=en) than what the actual google web console provides. For instance: Google lets you download max. 1000 rows of data. SearchConsoleApp let's you download as much data as possible, with multiple secret arguments in combinations, typically not possible with the Web App. See [Google's api doc](https://developers.google.com/webmaster-tools/v3/how-tos/search_analytics) to find out more.
+    - More: 
+    	- Module based: Use it like one application or use a part of it.
+        - Cleanses incoming data and saves then in usable .csv files. 
+        - Files are in a ready to go for database format (mysql).
+        - run directly from your terminal/cmd line
 
-**Data pipeline to pull everything that the google webmaster as to offer**
-### Uses search analytics api
-- Data is fetch from the api. Next, incoming data is cleansed, treated using pandas and np. 
-- Works as a data pipeline. One app to download everything in a ready to go file format: csv.
-- Looks for the system location, finds if the data request is already available on the local machine
-- If not, creates the fodlers appropriately with sub fodlers
-- Downloads everything and stores them into their appropriate folders automatically.
-- In order to best utilize all the possible dimensions and filters that SA has to offer: 
-- Data is pulled one by one from each of the scripts.
-- Hack: User can fetch more than the max total rows permitted for downloads by the search console web, using this app.
+#### This App basically works as a Data pipeline to pull everything that the Google Webmaster as to offer.####
+
+** Techstack and more about SearchConsoleApp**
+- Search Console Api (Google Webmaster)
+- python (core)
+	- py modules: http, oauth2, sys, argv, pandas, os.
+- shell
+- db
+	- local instance: MySQL
+    - Integrated: Big Query
+- ds: hash, arrays, hash in a array etc.
 
 -- 
-*Complete infrastructure is built by me for using google cloud api services modules* 
+*Complete infrastructure is built by me for using google cloud api services modules*
