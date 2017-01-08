@@ -12,7 +12,7 @@
 
 #### This App basically works as a Data pipeline to pull everything that the Google Webmaster as to offer.####
 
-** Techstack and more about SearchConsoleApp**
+**Techstack and more about SearchConsoleApp**
 - Search Console Api (Google Webmaster)
 - python (core)
 	- py modules: http, oauth2, sys, argv, pandas, os.
