@@ -24,9 +24,8 @@
 
 Dependencies before using the app:
 - Google’s python-gflags
-- httplib2
-- google-api-python-client
-- apache local host (for client machine) : optional.
+- [httplib2](https://github.com/jcgregorio/httplib2)
+- [google-api-python-client](https://github.com/google/google-api-python-client)
+- apache local host (for client machine, you can install xampp/mamp) : optional.
 
 -- 
-*Complete infrastructure is built by me for using google cloud api services modules*
