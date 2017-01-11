@@ -26,7 +26,7 @@ start_date = str(sys.argv[1]).strip()
 end_date = str(sys.argv[2]).strip()
 
 # change property url with the properties you have verified on Google Webmaster Tool
-property_url = ['http://www.emdmillipore.com', 'https://www.emdmillipore.com', 'http://www.merckmillipore.com', 'https://www.merckmillipore.com']
+property_url = [] #if this is empty add your properties here first.
 searchtypes = ['web', 'image', 'video']
 
 #create output folders at the location

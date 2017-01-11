@@ -10,7 +10,7 @@
         - Files are in a ready to go for database format (mysql).
         - run directly from your terminal/cmd line
 
-#### This App basically works as a Data pipeline to pull everything that the Google Webmaster as to offer.####
+#### This App basically works as a Data pipeline to extract everything that the Google Webmaster as to offer.####
 --
 **Techstack and more about SearchConsoleApp**
 - Search Console Api (Google Webmaster)
@@ -21,6 +21,12 @@
 	- local instance: MySQL
     - Integrated: Big Query
 - ds: hash, arrays, hash in a array etc.
+
+Dependencies before using the app:
+- Google’s python-gflags
+- httplib2
+- google-api-python-client
+- apache local host (for client machine) : optional.
 
 -- 
 *Complete infrastructure is built by me for using google cloud api services modules*
