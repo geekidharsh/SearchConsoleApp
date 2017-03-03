@@ -22,10 +22,14 @@
     - Integrated: Big Query
 - ds: hash, arrays, hash in a array etc.
 
-Dependencies before using the app:
+Core requirements:
 - Google’s python-gflags
+- Google Developers account and verified domains (even for testing).
 - [httplib2](https://github.com/jcgregorio/httplib2)
 - [google-api-python-client](https://github.com/google/google-api-python-client)
-- apache local host (for client machine, you can install xampp/mamp) : optional.
+
+Optional recommended requirements:
+- apache local host (for client machine, you can install xampp/mamp).
+- A warehouse than can support data incrementation in millions of rows.
 
 -- 
