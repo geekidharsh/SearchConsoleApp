@@ -1,4 +1,5 @@
-## SearchConsoleApp 
+## SearchConsoleApp
+
 - A cli/terminal based app for client, written in python that used Webmaster's Search Console API to simplify the entire data flow from Google servers to your local client machine.
 - Features:
 	- **Simple:** 100% Client based. Simply create a local server and start using. _(Provided: Console has verified properties and Search Console API enabled with Oauth key generated already in order to authenticate client machine)._
@@ -32,4 +33,4 @@ Optional recommended requirements:
 - apache local host (for client machine, you can install xampp/mamp).
 - A warehouse than can support data incrementation in millions of rows.
 
--- 
+--
