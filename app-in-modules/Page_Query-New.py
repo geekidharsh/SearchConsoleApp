@@ -50,10 +50,11 @@ def main(argv):
 '''
 Below will declare:
   1. an empty dataframe to collect all the cleansed responses into one
-  2. startcount is the startrow for request made to the api in request dict. It starts with 0 and is inremented by 
+  2. startcount is the startrow for request made to the api in request dict. It starts with 0 and is incremented by 
     5000 after every outer loop until 60000 rows. This value can be increased further as needed.
   3. start row is incremented in batches of 5000 only, as per the google doc, row_limit can't be less than 1 and more than 5000.
   4. search_type is a list of all types of search data available with Google : web, image and video searches.
+  5. the idea is to get all the possible data till 65000 rows for each verified property_url and each of the search types for every property.
 '''
   final_data = pd.DataFrame()
   startcount = 0
