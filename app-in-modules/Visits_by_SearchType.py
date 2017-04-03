@@ -92,17 +92,17 @@ def main(argv):
       # web
       web_data['Date'] = web_data['keys']
       web_data.drop('keys', axis=1, inplace=True)
-      web_data = web_data.assign(site = url, startDate = start_date, endDate = end_date, searchType = 'web')
+      web_data = web_data.assign(site = url, searchType = 'web')
       final_data = final_data.append(web_data, ignore_index = True)
       # image
       img_data['Date'] = img_data['keys']
       img_data.drop('keys', axis=1, inplace=True)
-      img_data = img_data.assign(site = url, startDate = start_date, endDate = end_date, searchType = 'image')
+      img_data = img_data.assign(site = url, searchType = 'image')
       final_data = final_data.append(img_data, ignore_index = True)
       # video
       vid_data['Date'] = vid_data['keys']
       vid_data.drop('keys', axis=1, inplace=True)
-      vid_data = vid_data.assign(site = url, startDate = start_date, endDate = end_date, searchType = 'video')
+      vid_data = vid_data.assign(site = url, searchType = 'video')
       final_data = final_data.append(vid_data, ignore_index = True)
 
       #store data in based on type
