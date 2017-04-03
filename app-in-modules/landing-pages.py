@@ -1,4 +1,3 @@
-#!/usr/bin/python
 """
 Sample usage:
 
@@ -23,7 +22,7 @@ argparser.add_argument('end_date', type=str,
 
 start_date = str(sys.argv[1]).strip()
 end_date = str(sys.argv[2]).strip()
-property_url = ['example.com'] #replace this with your actual verified property before executing the script
+property_url = ['www.harshvardhanpandey.com'] #replace this with your actual verified property before executing the script
 
 #create output folders at the location
 lp_loc = os.getcwd()+"/"+"Landing_Pages"
@@ -56,7 +55,6 @@ def main(argv):
         final_data = final_data.append(response, ignore_index = True)
         print "Finished working on {} {}".format(url, startcount)
       except Exception as e:
-        raise e
         print "Not enough response for {} at rows {}.".format(url, startcount)
         urls.remove(url)
     startcount = startcount + 5000
