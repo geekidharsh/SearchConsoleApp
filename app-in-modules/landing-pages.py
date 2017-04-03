@@ -1,7 +1,5 @@
 """
-Sample usage:
-
-  $ python search_analytics_api_******.py 2015-05-01  2015-05-30
+Sample usage:  $ python search_analytics_api_******.py 2015-05-01  2015-05-30
 """
 import argparse
 import sys
@@ -40,7 +38,7 @@ else:
 
 def main(argv):
   service, flags = sample_tools.init(
-      argv, 'webmasters', 'v3', __doc__, __file__, parents=[argparser], #understand what __doc__ and __file__ is 
+      argv, 'webmasters', 'v3', __doc__, __file__, parents=[argparser],
       scope='https://www.googleapis.com/auth/webmasters.readonly')
   urls = property_url # temp list to keep all properties
   final_data = pd.DataFrame() #empty dataframe declared here
