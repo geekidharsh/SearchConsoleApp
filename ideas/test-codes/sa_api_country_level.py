@@ -23,7 +23,7 @@ argparser.add_argument('end_date', type=str,
 
 start_date = str(sys.argv[1]).strip()
 end_date = str(sys.argv[2]).strip()
-property_url = ['http://www.emdmillipore.com', 'https://www.emdmillipore.com', 'http://www.merckmillipore.com', 'https://www.merckmillipore.com']
+property_url = []
 
 #create output folders at the location
 cl_loc = os.getcwd()+"/"+"Country_Level"
