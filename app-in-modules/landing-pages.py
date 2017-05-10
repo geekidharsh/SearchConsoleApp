@@ -1,5 +1,5 @@
 """
-Sample usage:  $ python search_analytics_api_******.py 2015-05-01  2015-05-30
+Sample usage:  $ python thisfilename.py YYYY-MM-DD YYYY-MM-DD
 """
 import argparse
 import sys
@@ -8,6 +8,7 @@ from googleapiclient import sample_tools
 import pandas as pd
 from pandas.io.json import json_normalize
 import json
+
 
 # Declare command-line flags.
 argparser = argparse.ArgumentParser(add_help=False)
@@ -20,7 +21,7 @@ argparser.add_argument('end_date', type=str,
 
 start_date = str(sys.argv[1]).strip()
 end_date = str(sys.argv[2]).strip()
-property_url = ['www.harshvardhanpandey.com'] #replace this with your actual verified property before executing the script
+property_url = ['www.example.com'] #replace this with your actual verified property before executing the script
 
 #create output folders at the location
 lp_loc = os.getcwd()+"/"+"Landing_Pages"
@@ -40,14 +41,24 @@ def main(argv):
   service, flags = sample_tools.init(
       argv, 'webmasters', 'v3', __doc__, __file__, parents=[argparser],
       scope='https://www.googleapis.com/auth/webmasters.readonly')
+  
+  ''' declare some variables here'''
   urls = property_url # temp list to keep all properties
   final_data = pd.DataFrame() #empty dataframe declared here
   startcount = 0
+  dimension = ['page', 'date'] #dimensions to request from api
+  '''
+  check if user wants landing pages or landing pages along with their daily traffic
+  '''
+  selectInput = int(raw_input("Select 1 or 2. Do you want to pull:\n1. Landing pages or 2. Landing pages with dates:").strip())
+  if selectInput == 1:
+    del dimension[1]
+  
   while len(urls) > 0:
     for url in urls:
       try:
         #'rows' selects only rows from the incoming data
-        response = execute_request(service, url, request_data(start_date, end_date, startcount))
+        response = execute_request(service, url, request_data(start_date, end_date, startcount, dimension))
         response = response['rows'] 
         response = clean_response(response, url, start_date, end_date)
         final_data = final_data.append(response, ignore_index = True)
@@ -58,27 +69,31 @@ def main(argv):
     startcount = startcount + 5000
   else:
     print "Urls left {}".format(len(urls))
-  # saving to file(s) 
-  file_name = lp_path+"/"+str(start_date+end_date)+"-pages-all"+".csv"
+
+  # saving to a file 
+  file_name = lp_path+"/"+str(start_date+end_date)+'-'.join(dimension)+".csv"
   final_data.to_csv(file_name, encoding="utf-8")
   print "File created at", lp_path
 
-def request_data(start_date, end_date, startrow):
+def request_data(start_date, end_date, startrow, dimension):
   request = {
       'startDate': start_date,
       'endDate': end_date,
-      'dimensions': ['page'],
+      'dimensions': dimension,
       'startRow': startrow,
-      'rowLimit': 5000 # row limit
+      'rowLimit': 5000 # #row limit is between 1 to 5000
       }
   return request
 
 '''clean_response takes a request for various search types and cleanses it and converts it into a pandas df and returns'''
 def clean_response(response, url, start_date, end_date):
   response = json_normalize(response)
-  response['URL'] = response['keys'].apply(get_first)
+  response['URL'], response['DOY'] = response['keys'].apply(get_first), response['keys'].apply(get_sec)
   response.drop('keys', axis=1, inplace=True)
-  response = response.assign(startDate = start_date, endDate = end_date, site = url)
+  if len(dimension)>=2:
+    response = response.assign(site = url)
+  else:
+    response = response.assign(site+url, startDate=start_date, endDate=end_date)
   return response
 
 def execute_request(service, url, request):
@@ -86,6 +101,9 @@ def execute_request(service, url, request):
 
 def get_first(key_list):
   return key_list[0]
+
+def get_sec(key_list):
+  return key_list[1]
 
 if __name__ == '__main__':
   main(sys.argv)
