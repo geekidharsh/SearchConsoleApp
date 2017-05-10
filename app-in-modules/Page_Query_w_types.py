@@ -1,10 +1,5 @@
-#!/usr/bin/python
-
 """
-Sample usage:
-
-  $ python search_analytics_api_******.py 2015-05-01  2015-05-30
-
+Sample usage:  $ python thisfilename.py YYYY-MM-DD YYYY-MM-DD
 """
 import argparse
 import sys
@@ -24,17 +19,21 @@ argparser.add_argument('end_date', type=str,
                              'YYYY-MM-DD format.'))
 start_date = str(sys.argv[1]).strip()
 end_date = str(sys.argv[2]).strip()
+
 # change property url with the properties you have verified on Google Webmaster Tool
 property_url = ['http://www.example1.com', 'https://www.example2.com', 'http://www.example3.com', 'https://www.example4.com']
+# to enable data from all search types be pulled in a single script run
 searchtypes = ['web', 'image', 'video']
+
 #create output folders at the location
 pq_loc = os.getcwd()+"/"+"Page_Query"
 pq_path= pq_loc+"/"+start_date+"-"+end_date
 file_path = pq_path+"/"
+
 #check if the folders exists already
 if (os.path.exists(pq_loc)): 
   if (os.path.exists(pq_path)):
-    print "Error: Folder for given dates exists at the location", pq_path
+    print "Error: Folder for given dates exists at the location:", pq_path
   else: 
     os.mkdir(pq_path)
     for types in searchtypes:
@@ -63,12 +62,12 @@ def main(argv):
         # cleaning the data below
         first_response['URL'], first_response['Query'] = first_response['keys'].apply(get_first),first_response['keys'].apply(get_second)        
         first_response.drop('keys', axis=1, inplace=True)
-        # store cleansed data in file(s)
-        file_name = file_path+types+"/"+str(url).replace("://","-")+"-1-"+types+".csv"
-        first_response.to_csv(file_name, encoding="utf-8")
-        filecount = filecount+1
-        # repeat the same process in second_response
-        if types == 'video':
+        first_response = first_response.assign(searchtype = types) 
+        first_response = first_response.assign(startDate = start_date) 
+        first_response = first_response.assign(endDate = end_date)
+        
+        # Repeat the same process in second_response
+        if types == 'video': #ignoring second response for videos with rows over 5000 while running others
           pass
         else:
           response = execute_request(service, url, request_data(5000, types))
@@ -76,14 +75,21 @@ def main(argv):
           second_response = json_normalize(second_response)
           second_response['URL'], second_response['Query'] = second_response['keys'].apply(get_first),second_response['keys'].apply(get_second)
           second_response.drop('keys', axis=1, inplace=True)
-          file_name = file_path+types+"/"+str(url).replace("://","-")+"-2-"+types+".csv"
-          second_response.to_csv(file_name, encoding="utf-8")
-          filecount = filecount+1
+          second_response = second_response.assign(searchtype = types) 
+          second_response = second_response.assign(startDate = start_date) 
+          second_response = second_response.assign(endDate = end_date)
+          # merging both responses together in a single dataframe
+          first_response = first_response.append(second_response, ignore_index=True)
+          
+        #saving to file(s)
+        file_name = file_path+types+"/"+str(url).replace("://","-")+"-"+types+".csv"
+        first_response.to_csv(file_name, encoding="utf-8")
+        filecount = filecount+1
         print "Finished all of\t:\t", url, types
       except Exception as e:
         print "Error on:\t", url, types, e
   
-  print "\n"+str(filecount)+" new files page-query files created at the location." 
+  print "\n"+str(filecount)+" new files page-query files generated at the location." 
 
 def request_data(startrow, searchtype):
   request = {
@@ -91,7 +97,7 @@ def request_data(startrow, searchtype):
       'endDate': end_date,
       'dimensions': ['page', 'query'],
       'startRow': startrow,
-      'rowLimit': 50, # row limit has been changed for testing
+      'rowLimit': 5000, # row limit has been changed for testing
       'searchType': searchtype}
   return request
 
