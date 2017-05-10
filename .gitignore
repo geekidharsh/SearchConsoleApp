@@ -1,0 +1,10 @@
+# C extensions
+*.so
+
+# Distribution / packaging
+
+# pyenv
+.python-version
+
+# test-files
+test*.py
