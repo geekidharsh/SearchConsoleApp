@@ -7,4 +7,4 @@
 .python-version
 
 # test-files
-test*.py
+test-loc/test*.py
