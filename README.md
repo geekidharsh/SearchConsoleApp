@@ -34,5 +34,7 @@ Optional recommended requirements:
 - A warehouse than can support data incrementation in millions of rows.
 
 --
+
 To clone this project, from your terminal go: 
-`git clone https://github.com/geekidharsh/SearchConsoleApp/`
+
+- `git clone https://github.com/geekidharsh/SearchConsoleApp/`
